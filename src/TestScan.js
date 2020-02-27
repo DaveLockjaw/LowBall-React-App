@@ -2,20 +2,23 @@
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
 // Set the region
-AWS.config.update({region: 'us-east-2'});
+var credentials = new AWS.SharedIniFileCredentials();
+AWS.config.credentials = credentials;
+
+AWS.config.update({/*accessKeyId: 'AKIAIOQISPXCU4ZTULGA', secretAccessKey: '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',*/region: 'us-east-2'});
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 var params = {
-  ExpressionAttributeValues: {
-    ':designer': {S: 'Maison Margiela'},
-    ':category': {S: 'Shoes'},
-    ':size' : {N: 12},
-    ':price' : {N: 150}
-  },
+  TableName: 'listings',
   ProjectionExpression: 'designer, category, size, price',
-  FilterExpression: 'designer = :designer, category = :category, size = :size, price = :price',
-  TableName: 'listings'
+  /*FilterExpression: 'designer = :designer and category = :category and size = :size and price = :price',
+  ExpressionAttributeValues: {
+    ':designer': 'Maison Margiela',
+    ':category': 'Shoes',
+    ':size' : 12,
+    ':price' : 150
+  }*/
 };
 
 console.log("Scanning Clothing Table.");
