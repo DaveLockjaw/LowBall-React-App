@@ -2,10 +2,7 @@
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
 // Set the region
-var credentials = new AWS.SharedIniFileCredentials();
-AWS.config.credentials = credentials;
-
-AWS.config.update({/*accessKeyId: 'AKIAIOQISPXCU4ZTULGA', secretAccessKey: '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',*/region: 'us-east-2'});
+AWS.config.update({accessKeyId: 'AKIAIOQISPXCU4ZTULGA', secretAccessKey: '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', region: 'us-east-2'});
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
